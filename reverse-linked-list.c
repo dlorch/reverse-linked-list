@@ -49,6 +49,12 @@ void print_linked_list(linked_list* list) {
 
 linked_list* make_linked_list(int value) {
     linked_list* list = malloc(sizeof(linked_list));
+
+    if(list == NULL) {
+        fprintf(stderr, "malloc failed\n");
+        exit(1);
+    }
+
     list->next = (linked_list*)NULL;
     list->value = value;
 
@@ -64,6 +70,12 @@ void append(linked_list* list, int value) {
     }
 
     last->next = malloc(sizeof(linked_list));
+
+    if(last->next == NULL) {
+        fprintf(stderr, "malloc failed\n");
+        exit(1);
+    }
+
     last->next->next = (linked_list*)NULL;
     last->next->value = value;
 }
