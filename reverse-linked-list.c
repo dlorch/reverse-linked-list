@@ -64,7 +64,7 @@ void append(linked_list* list, int value) {
     }
 
     last->next = malloc(sizeof(linked_list));
-    last->next->next = NULL;
+    last->next->next = (linked_list*)NULL;
     last->next->value = value;
 }
 
