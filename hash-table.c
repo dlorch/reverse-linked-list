@@ -34,8 +34,8 @@
 #include "hash-table.h"
 
 void fatal_error(char* msg) {
-    fprintf(stderr, "%s", msg);
-    exit(1);
+	fprintf(stderr, "%s", msg);
+	exit(1);
 }
 
 hash_table* make_hash_table() {
