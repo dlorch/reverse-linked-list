@@ -33,7 +33,7 @@
 #include "reverse-linked-list.h"
 
 void fatal_error(char* msg) {
-    fprintf(stderr, msg);
+    fprintf(stderr, "%s", msg);
     exit(1);
 }
 
@@ -73,14 +73,7 @@ void append(linked_list* list, int value) {
         last = last->next;
     }
 
-    last->next = malloc(sizeof(linked_list));
-
-    if(last->next == NULL) {
-        fatal_error("malloc failed\n");
-    }
-
-    last->next->next = (linked_list*)NULL;
-    last->next->value = value;
+    last->next = make_linked_list(value);
 }
 
 void destroy_linked_list(linked_list** list) {
