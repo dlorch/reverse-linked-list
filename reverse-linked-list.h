@@ -11,5 +11,7 @@ linked_list* make_linked_list(int value);
 void destroy_linked_list(linked_list** list);
 linked_list* reverse_linked_list(linked_list* list);
 void fatal_error(char* msg);
+linked_list* prepend(linked_list* list, int value);
+void append(linked_list* list, int value);
 
 #endif
