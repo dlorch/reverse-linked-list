@@ -40,11 +40,11 @@ void fatal_error(char* msg) {
 
 hash_table* make_hash_table() {
 	// important: memory must be zeroed, since linked list's append() checks for NULL values
-    hash_table* table = calloc(1, sizeof(hash_table));
+	hash_table* table = calloc(1, sizeof(hash_table));
 
-    if(table == NULL) {
-        fatal_error("calloc failed\n");
-    }
+	if(table == NULL) {
+		fatal_error("calloc failed\n");
+	}
 
 	return table;
 }
@@ -80,44 +80,44 @@ void append(hash_table_entry** entry, char* key, char* value) {
 	if(*entry == (hash_table_entry*)NULL) {
 		*entry = make_linked_list(key, value);
 	} else {
-	    hash_table_entry* last = *entry;
+		hash_table_entry* last = *entry;
 
 		// fast-forward to last element
-    	while(last->next != (hash_table_entry*)NULL) {
-        	last = last->next;
-    	}
+		while(last->next != (hash_table_entry*)NULL) {
+			last = last->next;
+		}
 
 		last->next = make_linked_list(key, value);
 	}
 }
 
 hash_table_entry* make_linked_list(char* key, char* value) {
-    hash_table_entry* entry = malloc(sizeof(hash_table_entry));
+	hash_table_entry* entry = malloc(sizeof(hash_table_entry));
 
-    if(entry == NULL) {
-        fatal_error("malloc failed\n");
-    }
+	if(entry == NULL) {
+		fatal_error("malloc failed\n");
+	}
 
-    entry->next = (hash_table_entry*)NULL;
-    entry->key = strdup(key);
+	entry->next = (hash_table_entry*)NULL;
+	entry->key = strdup(key);
 	entry->value = strdup(value);
 
-    return entry;
+	return entry;
 }
 
 void destroy_linked_list(hash_table_entry** entries) {
-    hash_table_entry* current = *entries;
-    hash_table_entry* next;
+	hash_table_entry* current = *entries;
+	hash_table_entry* next;
 
-    while(current != (hash_table_entry*)NULL) {
-        next = current->next;
+	while(current != (hash_table_entry*)NULL) {
+		next = current->next;
 		free(current->key);
 		free(current->value);
-        free(current);
-        current = next;
-    }
+		free(current);
+		current = next;
+	}
 
-    *entries = (hash_table_entry*)NULL;
+	*entries = (hash_table_entry*)NULL;
 }
 
 char* lookup(hash_table* table, char* key) {
