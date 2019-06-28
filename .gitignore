@@ -1,2 +1,3 @@
-reverse-linked-list.dSYM
+*.dSYM
 reverse-linked-list
+hash-table
