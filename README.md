@@ -1,7 +1,7 @@
 Reversing a linked list in O(n) written in C
 ============================================
 
-Hey TechLead, this is how to reverse a linked list. In O(n).
+Hey #TechLead, this is how to reverse a linked list in O(n).
 
 Run
 ---
