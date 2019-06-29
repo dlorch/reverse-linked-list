@@ -1,7 +1,7 @@
-Reversing a linked list in O(n) written in C
-============================================
+Reversing a linked list in-place, written in C
+==============================================
 
-Hey @TechLead, this is how to reverse a linked list in O(n).
+Hey @TechLead, this is how to reverse a linked list in-place in O(n).
 
 ```
 $ make
@@ -11,3 +11,7 @@ $ ./reverse-linked-list
 ```
 
 More random things can be found in this directory.
+
+- knapsack
+- avl-tree
+- arch (endianness, stack growth)

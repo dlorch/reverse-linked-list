@@ -1,5 +1,5 @@
 /*
-	Reversing a linked list in O(n) written in C
+	Reversing a linked list in-place, written in C
 
 	BSD 2-Clause License
 
@@ -89,23 +89,26 @@ void destroy_linked_list(linked_list** list) {
     *list = (linked_list*)NULL;
 }
 
-linked_list* prepend(linked_list* list, int value) {
-    linked_list* prepend = make_linked_list(value);
-    prepend->next = list;
-    return prepend;
-}
-
-// reverse a linked list in O(n)
-linked_list* reverse_linked_list(linked_list* list) {
-    linked_list* reverse = NULL;
-    linked_list* current = list;
+// reverse a linked list in-place
+void reverse_linked_list(linked_list** list) {
+    linked_list* current = *list;
+    linked_list* next = (linked_list*)NULL;
+    linked_list* prev = (linked_list*)NULL;
 
     while(current != NULL) {
-        reverse = prepend(reverse, current->value);
-        current = current->next;
+        next = current->next;
+
+        if(prev != (linked_list*)NULL) {
+            current->next = prev;
+        } else {
+            current->next = (linked_list*)NULL;
+        }
+
+        prev = current;
+        current = next;
     }
 
-    return reverse;
+    *list = prev;
 }
 
 int main() {
@@ -118,11 +121,10 @@ int main() {
     append(list, 8);
     print_linked_list(list);
 
-    linked_list* reverse = reverse_linked_list(list);
-    print_linked_list(reverse);
+    reverse_linked_list(&list);
+    print_linked_list(list);
 
     destroy_linked_list(&list);
-    destroy_linked_list(&reverse);
 
     return 0;
 }
