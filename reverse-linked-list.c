@@ -40,8 +40,8 @@ void fatal_error(char* msg) {
 void print_linked_list(linked_list* list) {
     linked_list* current = list;
 
-    while(current != NULL) {
-        if(current->next != NULL) {
+    while(current != (linked_list*)NULL) {
+        if(current->next != (linked_list*)NULL) {
             printf("%d, ", current->value);
         } else {
             printf("%d", current->value);
@@ -55,7 +55,7 @@ void print_linked_list(linked_list* list) {
 linked_list* make_linked_list(int value) {
     linked_list* list = malloc(sizeof(linked_list));
 
-    if(list == NULL) {
+    if(list == (linked_list*)NULL) {
         fatal_error("malloc failed\n");
     }
 
@@ -95,7 +95,7 @@ void reverse_linked_list(linked_list** list) {
     linked_list* next = (linked_list*)NULL;
     linked_list* prev = (linked_list*)NULL;
 
-    while(current != NULL) {
+    while(current != (linked_list*)NULL) {
         next = current->next;
         current->next = prev;
         prev = current;
