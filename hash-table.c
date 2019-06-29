@@ -73,22 +73,22 @@ void insert(hash_table* table, char* key, char* value) {
 	int hash = hashfunc(key);
 	int index = hash % NUM_BUCKETS;
 
-	append(&(table->buckets[index]), key, value);
+	if(table->buckets[index] == (hash_table_entry*)NULL) {
+		table->buckets[index] = make_linked_list(key, value);
+	} else {
+		append(table->buckets[index], key, value);
+	}
 }
 
-void append(hash_table_entry** entry, char* key, char* value) {
-	if(*entry == (hash_table_entry*)NULL) {
-		*entry = make_linked_list(key, value);
-	} else {
-		hash_table_entry* last = *entry;
+void append(hash_table_entry* entry, char* key, char* value) {
+	hash_table_entry* last = entry;
 
-		// fast-forward to last element
-		while(last->next != (hash_table_entry*)NULL) {
-			last = last->next;
-		}
-
-		last->next = make_linked_list(key, value);
+	// fast-forward to last element
+	while(last->next != (hash_table_entry*)NULL) {
+		last = last->next;
 	}
+
+	last->next = make_linked_list(key, value);
 }
 
 hash_table_entry* make_linked_list(char* key, char* value) {
