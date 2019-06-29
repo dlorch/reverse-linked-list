@@ -97,13 +97,7 @@ void reverse_linked_list(linked_list** list) {
 
     while(current != NULL) {
         next = current->next;
-
-        if(prev != (linked_list*)NULL) {
-            current->next = prev;
-        } else {
-            current->next = (linked_list*)NULL;
-        }
-
+        current->next = prev;
         prev = current;
         current = next;
     }
