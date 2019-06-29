@@ -3,24 +3,36 @@
 
 #define NUM_BUCKETS 16
 
+/* Misc */
+
+void fatal_error(char* msg);
+
+/* Linked List */
+
 typedef struct _hash_table_entry {
     struct _hash_table_entry* next;
     char* key;
     char* value;
 } hash_table_entry;
 
+void linked_list_append(hash_table_entry* entry, char* key, char* value);
+hash_table_entry* linked_list_new(char* key, char* value);
+void linked_list_destroy(hash_table_entry** list);
+char* linked_list_lookup(hash_table_entry* entries, char* key);
+
+/* Hash Table */
+
 typedef struct _hash_table {
     hash_table_entry* buckets[NUM_BUCKETS];
 } hash_table;
 
-void fatal_error(char* msg);
-hash_table* make_hash_table();
-void destroy_hash_table(hash_table** table);
+hash_table* hash_table_new();
+void hash_table_destroy(hash_table** table);
+void hash_table_insert(hash_table* table, char* key, char* value);
+char* hash_table_lookup(hash_table* table, char* key);
+
+/* Hash Function */
+
 int hashfunc(char* key);
-void insert(hash_table* table, char* key, char* value);
-void append(hash_table_entry* entry, char* key, char* value);
-hash_table_entry* make_linked_list(char* key, char* value);
-void destroy_linked_list(hash_table_entry** list);
-char* lookup(hash_table* table, char* key);
 
 #endif

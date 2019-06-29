@@ -38,7 +38,7 @@ void fatal_error(char* msg) {
 	exit(1);
 }
 
-hash_table* make_hash_table() {
+hash_table* hash_table_new() {
 	// important: memory must be zeroed, since linked list's append() checks for NULL values
 	hash_table* table = calloc(1, sizeof(hash_table));
 
@@ -49,9 +49,10 @@ hash_table* make_hash_table() {
 	return table;
 }
 
-void destroy_hash_table(hash_table** table) {
+void hash_table_destroy(hash_table** table) {
 	for(int i=0; i<NUM_BUCKETS; i++) {
-		destroy_linked_list(&((*table)->buckets[i]));
+		hash_table_entry* bucket = (*table)->buckets[i];
+		linked_list_destroy(&bucket);
 	}
 
 	free(*table);
@@ -69,18 +70,18 @@ int hashfunc(char* key) {
 	return hash;
 }
 
-void insert(hash_table* table, char* key, char* value) {
+void hash_table_insert(hash_table* table, char* key, char* value) {
 	int hash = hashfunc(key);
 	int index = hash % NUM_BUCKETS;
 
 	if(table->buckets[index] == (hash_table_entry*)NULL) {
-		table->buckets[index] = make_linked_list(key, value);
+		table->buckets[index] = linked_list_new(key, value);
 	} else {
-		append(table->buckets[index], key, value);
+		linked_list_append(table->buckets[index], key, value);
 	}
 }
 
-void append(hash_table_entry* entry, char* key, char* value) {
+void linked_list_append(hash_table_entry* entry, char* key, char* value) {
 	hash_table_entry* last = entry;
 
 	// fast-forward to last element
@@ -88,10 +89,10 @@ void append(hash_table_entry* entry, char* key, char* value) {
 		last = last->next;
 	}
 
-	last->next = make_linked_list(key, value);
+	last->next = linked_list_new(key, value);
 }
 
-hash_table_entry* make_linked_list(char* key, char* value) {
+hash_table_entry* linked_list_new(char* key, char* value) {
 	hash_table_entry* entry = malloc(sizeof(hash_table_entry));
 
 	if(entry == NULL) {
@@ -105,7 +106,7 @@ hash_table_entry* make_linked_list(char* key, char* value) {
 	return entry;
 }
 
-void destroy_linked_list(hash_table_entry** entries) {
+void linked_list_destroy(hash_table_entry** entries) {
 	hash_table_entry* current = *entries;
 	hash_table_entry* next;
 
@@ -120,21 +121,28 @@ void destroy_linked_list(hash_table_entry** entries) {
 	*entries = (hash_table_entry*)NULL;
 }
 
-char* lookup(hash_table* table, char* key) {
+char* hash_table_lookup(hash_table* table, char* key) {
 	char* result = (char*)NULL;
 	int hash = hashfunc(key);
 	int index = hash % NUM_BUCKETS;
 
 	if(table->buckets[index] != (hash_table_entry*)NULL) {
-		hash_table_entry* entry = table->buckets[index];
+		result = linked_list_lookup(table->buckets[index], key);
+	}
 
-		while(entry != (hash_table_entry*)NULL) {
-			if(strcmp(key, entry->key) == 0) {
-				result = entry->value;
-				break;
-			}
-			entry = entry->next;
+	return result;
+}
+
+char* linked_list_lookup(hash_table_entry* entries, char* key) {
+	char* result = (char*)NULL;
+	hash_table_entry* entry = entries;
+
+	while(entry != (hash_table_entry*)NULL) {
+		if(strcmp(key, entry->key) == 0) {
+			result = entry->value;
+			break;
 		}
+		entry = entry->next;
 	}
 
 	return result;
@@ -142,16 +150,16 @@ char* lookup(hash_table* table, char* key) {
 
 // Hash table: https://en.wikipedia.org/wiki/Hash_table
 int main() {
-	hash_table* phone_book = make_hash_table();
+	hash_table* phone_book = hash_table_new();
 
-	insert(phone_book, "John Smith", "521-1234");
-	insert(phone_book, "Lisa Smith", "521-8976");
-	insert(phone_book, "Sandra Dee", "521-9655");
-	insert(phone_book, "Ted Baker", "418-4165");
-	insert(phone_book, "Sandra Doe", "521-5030");
+	hash_table_insert(phone_book, "John Smith", "521-1234");
+	hash_table_insert(phone_book, "Lisa Smith", "521-8976");
+	hash_table_insert(phone_book, "Sandra Dee", "521-9655");
+	hash_table_insert(phone_book, "Ted Baker", "418-4165");
+	hash_table_insert(phone_book, "Sandra Doe", "521-5030");
 
 	char* key = "Lisa Smith";
-	char* value = lookup(phone_book, key);
+	char* value = hash_table_lookup(phone_book, key);
 
 	if(value != (char*)NULL) {
 		printf("Phone number of %s: %s.\n", key, value);
@@ -159,7 +167,7 @@ int main() {
 		printf("Could not find %s in the phone book.\n", key);
 	}
 
-	destroy_hash_table(&phone_book);
+	hash_table_destroy(&phone_book);
 
 	return 0;
 }
