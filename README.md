@@ -11,7 +11,3 @@ $ ./reverse-linked-list
 ```
 
 More random things can be found in this directory.
-
-- knapsack
-- avl-tree
-- arch (endianness, stack growth)
