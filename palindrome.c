@@ -35,8 +35,6 @@
 #include <stdlib.h>
 #include "palindrome.h"
 
-// "A man, a plan, a canal, Panama!", "Was it a car or a cat I saw?" or "No 'x' in Nixon"
-
 char* chars_only(char* str) {
     char* result = strdup(str); // result has same or smaller size than input string
     int str_index = 0;
