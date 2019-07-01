@@ -60,7 +60,6 @@ A [palindrome] is a word or sentence which reads the same backward as forward.
 
 ```
 ./palindrome
-gcc -std=c99 -Wall -o palindrome palindrome.c
 Palindrome checker. CTRL-D to exit.
 Enter word> madam
 YES, a palindrome
