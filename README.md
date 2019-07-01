@@ -56,19 +56,28 @@ Phone number of Lisa Smith: 521-8976.
 Palindrome
 ----------
 
-A palindrome is a word or sentence which reads the same backward as forward.
+A [palindrome] is a word or sentence which reads the same backward as forward.
 
 ```
-$ ./palindrome
-Palindrome checker. Enter empty line to exit.
+./palindrome
+gcc -std=c99 -Wall -o palindrome palindrome.c
+Palindrome checker. CTRL-D to exit.
 Enter word> madam
-'madam' is a palindrome!
+YES, a palindrome
 Enter word> racecar
-'racecar' is a palindrome!
+YES, a palindrome
 Enter word> banana
-'banana' is not a palindrome :-(
-Enter word>
+NO, not a palindrome
+Enter word> A man, a plan, a canal, Panama!
+YES, a palindrome
+Enter word> Was it a car or a cat I saw?
+YES, a palindrome
+Enter word> No 'x' in Nixon
+YES, a palindrome
+Enter word> This is not a palindrome
+NO, not a palindrome
 ```
 
 [reversing a singly linked list]: https://rethinkdb.com/blog/will-the-real-programmers-please-stand-up/
 [Hash table]: https://en.wikipedia.org/wiki/Hash_table
+[palindrome]: https://en.wikipedia.org/wiki/Palindrome

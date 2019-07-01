@@ -31,7 +31,28 @@
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
+#include <ctype.h>
+#include <stdlib.h>
 #include "palindrome.h"
+
+// "A man, a plan, a canal, Panama!", "Was it a car or a cat I saw?" or "No 'x' in Nixon"
+
+char* chars_only(char* str) {
+    char* result = strdup(str); // result has same or smaller size than input string
+    int str_index = 0;
+    int result_index = 0;
+
+    for(str_index = 0; str_index < strlen(str); str_index++) {
+        if(isalpha(str[str_index])) {
+            result[result_index] = tolower(str[str_index]);
+            result_index++;
+        }
+    }
+
+    result[result_index] = '\0';
+
+    return result;
+}
 
 bool is_palindrome(char* str) {
     int length = strlen(str);
@@ -52,29 +73,38 @@ bool is_palindrome(char* str) {
     return result;
 }
 
+void trim_newline(char* str) {
+    int len = strlen(str);
+    if(str[len - 1] == '\n') {
+        str[len - 1] = '\0';
+    }
+}
+
 int main() {
-    char input[LINE_MAX];
+    char sentence[LINE_MAX];
     bool loop = true;
 
-    printf("Palindrome checker. Enter empty line to exit.\n");
+    printf("Palindrome checker. CTRL-D to exit.\n");
 
     while(loop) {
         printf("Enter word> ");
-        fgets(input, LINE_MAX, stdin); // length count includes the final '\0' character
 
-        // remove newline
-        int i = strlen(input)-1;
-        if(input[i] == '\n') 
-            input[i] = '\0';
-
-        if(strlen(input) == 0) {
+        if(fgets(sentence, LINE_MAX, stdin) == NULL) { // length count in fgets() includes the final '\0' character
             loop = false;
         } else {
-            if(is_palindrome(input)) {
-                printf("'%s' is a palindrome!\n", input);
-            } else {
-                printf("'%s' is not a palindrome :-(\n", input);
+            trim_newline(sentence);
+
+            char* chars = chars_only(sentence);
+
+            if(strlen(chars) > 0) {
+                if(is_palindrome(chars)) {
+                    printf("YES, a palindrome\n");
+                } else {
+                    printf("NO, not a palindrome\n");
+                }
             }
+
+            free(chars);
         }
     }
 
