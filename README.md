@@ -59,7 +59,7 @@ Palindrome
 A [palindrome] is a word or sentence which reads the same backward as forward.
 
 ```
-./palindrome
+$ ./palindrome
 Palindrome checker. Enter a word or sentence. CTRL-D to exit.
 Enter word> madam
 YES
