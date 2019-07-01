@@ -84,10 +84,10 @@ int main() {
     char sentence[LINE_MAX];
     bool loop = true;
 
-    printf("Palindrome checker. CTRL-D to exit.\n");
+    printf("Palindrome checker. Enter a word or sentence. CTRL-D to exit.\n");
 
     while(loop) {
-        printf("Enter word> ");
+        printf("Input> ");
 
         if(fgets(sentence, LINE_MAX, stdin) == NULL) { // length count in fgets() includes the final '\0' character
             loop = false;
@@ -98,9 +98,9 @@ int main() {
 
             if(strlen(chars) > 0) {
                 if(is_palindrome(chars)) {
-                    printf("YES, a palindrome\n");
+                    printf("YES\n");
                 } else {
-                    printf("NO, not a palindrome\n");
+                    printf("NO\n");
                 }
             }
 
