@@ -161,14 +161,103 @@ void depth_first_search_post_order_traversal(binary_search_tree* tree) {
 }
 
 void breadth_first_search_level_order_traversal(binary_search_tree* tree) {
-	if(tree != (binary_search_tree*)NULL) {
-		// TODO: need doubly-linked-list for queue
-		// https://en.wikipedia.org/wiki/Breadth-first_search
+	queue* q = queue_new();
+	enqueue(q, tree);
+
+	while(!queue_is_empty(q)) {
+		binary_search_tree* node = dequeue(q);
+		visit_node(node);
+
+		if(node->left != (binary_search_tree*)NULL) {
+			enqueue(q, node->left);
+		}
+
+		if(node->right != (binary_search_tree*)NULL) {
+			enqueue(q, node->right);
+		}
 	}
+
+	queue_destroy(&q);
 }
 
 void visit_node(binary_search_tree* tree) {
 	printf("%d ", tree->value);
+}
+
+queue* queue_new() {
+	queue* q = malloc(sizeof(queue));
+
+	if(q == (queue*)NULL) {
+		fatal_error("malloc failed");
+	}
+
+	q->first = (linked_list*)NULL;
+	q->last = (linked_list*)NULL;
+	q->size = 0;
+
+	return q;
+}
+
+void queue_destroy(queue** q) {
+	linked_list* current = (*q)->first;
+    linked_list* next;
+
+    while(current != (linked_list*)NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+
+	free(*q);
+
+	*q = (queue*)NULL;
+}
+
+void enqueue(queue* queue, binary_search_tree* node) {
+	linked_list* list = malloc(sizeof(linked_list));
+
+	if(list == (linked_list*)NULL) {
+		fatal_error("malloc failed");
+	}
+
+	list->node = node;
+
+	if(queue->first == (linked_list*)NULL) {
+		list->next = (linked_list*)NULL;
+		list->prev = (linked_list*)NULL;
+		queue->first = list;
+		queue->last = list;
+		queue->size = 1;
+	} else {
+		list->next = (linked_list*)NULL;
+		list->prev = queue->last;
+
+		if(queue->last != (linked_list*)NULL) {
+			queue->last->next = list;
+		}
+		
+		queue->last = list;
+		queue->size += 1;
+	}
+}
+
+binary_search_tree* dequeue(queue* queue) {
+	binary_search_tree* result = (binary_search_tree*)NULL;
+
+	if(queue->size > 0) {
+		result = queue->last->node;
+		queue->last = queue->last->prev;
+		if(queue->last != (linked_list*)NULL) {
+			queue->last->next = (linked_list*)NULL;
+		}
+		queue->size -= 1;
+	}
+
+	return result;
+}
+
+bool queue_is_empty(queue* queue) {
+	return queue->size == 0;
 }
 
 // AVL tree: https://en.wikipedia.org/wiki/AVL_tree
@@ -186,8 +275,8 @@ int main() {
 	binary_search_tree_insert(&tree, 76);
 
 	printf("Height: %d\n", binary_search_tree_height(tree));
-	printf("Left subtree height: %d\n", binary_search_tree_height(tree->left));
-	printf("Right subtree height: %d\n", binary_search_tree_height(tree->right));
+	printf("Left sub-tree height: %d\n", binary_search_tree_height(tree->left));
+	printf("Right sub-tree height: %d\n", binary_search_tree_height(tree->right));
 	printf("Balance factor: %d\n", binary_search_tree_balance_factor(tree));
 
 	printf("Depth first search, pre-order traversal: ");
@@ -202,10 +291,9 @@ int main() {
 	depth_first_search_post_order_traversal(tree);
 	printf("\n");
 
-// TODO
-//	printf("Breadth first search, level-order traversal: ");
-//  breadth_first_search__level_order_traversal(tree);
-//	printf("\n");
+	printf("Breadth first search, level-order traversal: ");
+	breadth_first_search_level_order_traversal(tree);
+	printf("\n");
 
 	binary_search_tree_destroy(&tree);
 

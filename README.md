@@ -81,18 +81,19 @@ AVL Trees
 ---------
 
 An [AVL tree] is a [self-balancing binary search tree]. Various [tree traversal]
-algorithms are also implemented (depth-first-search with pre-order, in-order and post-order traversal, as well
-as breadth-first-search with level-order traversal).
+algorithms are also implemented (depth-first-search with pre-order-, in-order- and post-order-traversal,
+as well as breadth-first-search with level-order traversal).
 
 ```
 $ ./avl-tree
 Height: 4
-Left subtree height: 2
-Right subtree height: 3
+Left sub-tree height: 2
+Right sub-tree height: 3
 Balance factor (right - left): 1
 Depth first search, pre-order traversal: 17 12 9 14 67 23 19 54 72 76
 Depth first search, in-order traversal: 9 12 14 17 19 23 54 67 72 76
 Depth first search, post-order traversal: 9 14 12 19 54 23 76 72 67 17
+Breadth first search, level-order traversal: 17 67 72 76 23 54 19 12 14 9
 ```
 
 [reversing a singly linked list]: https://rethinkdb.com/blog/will-the-real-programmers-please-stand-up/
