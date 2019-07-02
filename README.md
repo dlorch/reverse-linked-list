@@ -85,7 +85,7 @@ algorithms are also implemented (depth-first-search with pre-order, in-order and
 as breadth-first-search with level-order traversal).
 
 ```
-./avl-tree
+$ ./avl-tree
 Height: 4
 Left subtree height: 2
 Right subtree height: 3
