@@ -185,15 +185,11 @@ void visit_node(binary_search_tree* tree) {
 }
 
 queue* queue_new() {
-	queue* q = malloc(sizeof(queue));
+	queue* q = calloc(sizeof(queue));
 
 	if(q == (queue*)NULL) {
-		fatal_error("malloc failed");
+		fatal_error("calloc failed");
 	}
-
-	q->first = (linked_list*)NULL;
-	q->last = (linked_list*)NULL;
-	q->size = 0;
 
 	return q;
 }
