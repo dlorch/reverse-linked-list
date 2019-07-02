@@ -78,5 +78,5 @@ NO
 ```
 
 [reversing a singly linked list]: https://rethinkdb.com/blog/will-the-real-programmers-please-stand-up/
-[Hash table]: https://en.wikipedia.org/wiki/Hash_table
+[hash table]: https://en.wikipedia.org/wiki/Hash_table
 [palindrome]: https://en.wikipedia.org/wiki/Palindrome
