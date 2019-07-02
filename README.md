@@ -46,7 +46,7 @@ $ ./reverse-linked-list
 Hash Table
 ----------
 
-[Hash table] implementation using buckets and linked lists, as described in the Wikipedia article.
+A [hash table] implementation using buckets and linked lists, as described in the Wikipedia article.
 
 ```
 $ ./hash-table
