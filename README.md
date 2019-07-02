@@ -80,3 +80,7 @@ NO
 [reversing a singly linked list]: https://rethinkdb.com/blog/will-the-real-programmers-please-stand-up/
 [hash table]: https://en.wikipedia.org/wiki/Hash_table
 [palindrome]: https://en.wikipedia.org/wiki/Palindrome
+[binary search tree (BST)]: https://en.wikipedia.org/wiki/Binary_search_tree
+[self-balancing binary search tree]: https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree
+[AVL tree]: https://en.wikipedia.org/wiki/AVL_tree
+[tree traversal]: https://en.wikipedia.org/wiki/Tree_traversal

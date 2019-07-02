@@ -32,6 +32,7 @@
 #include <string.h>
 #include <limits.h>
 #include <ctype.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include "palindrome.h"
 
