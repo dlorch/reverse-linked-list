@@ -35,8 +35,18 @@
 #include <stdlib.h>
 #include "palindrome.h"
 
+void fatal_error(char* msg) {
+    fprintf(stderr, "%s", msg);
+    exit(1);
+}
+
 char* chars_only(char* str) {
     char* result = strdup(str); // result has same or smaller size than input string
+
+    if(result == (char*)NULL) {
+        fatal_error("strdup failed\n");
+    }
+
     int str_index = 0;
     int result_index = 0;
 

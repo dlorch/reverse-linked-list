@@ -7,4 +7,6 @@ char* chars_only(char* str);
 bool is_palindrome(char* str);
 void trim_newline(char* str);
 
+void fatal_error(char* msg);
+
 #endif

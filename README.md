@@ -61,19 +61,19 @@ A [palindrome] is a word or sentence which reads the same backward as forward.
 ```
 $ ./palindrome
 Palindrome checker. Enter a word or sentence. CTRL-D to exit.
-Enter word> madam
+Input> madam
 YES
-Enter word> racecar
+Input> racecar
 YES
-Enter word> banana
+Input> banana
 NO
-Enter word> A man, a plan, a canal, Panama!
+Input> A man, a plan, a canal, Panama!
 YES
-Enter word> Was it a car or a cat I saw?
+Input> Was it a car or a cat I saw?
 YES
-Enter word> No 'x' in Nixon
+Input> No 'x' in Nixon
 YES
-Enter word> This is not a palindrome
+Input> This is not a palindrome
 NO
 ```
 
