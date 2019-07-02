@@ -231,11 +231,7 @@ void enqueue(queue* queue, binary_search_tree* node) {
 	} else {
 		list->next = (linked_list*)NULL;
 		list->prev = queue->last;
-
-		if(queue->last != (linked_list*)NULL) {
-			queue->last->next = list;
-		}
-		
+		queue->last->next = list;
 		queue->last = list;
 		queue->size += 1;
 	}
@@ -246,11 +242,19 @@ binary_search_tree* dequeue(queue* queue) {
 
 	if(queue->size > 0) {
 		result = queue->last->node;
-		queue->last = queue->last->prev;
-		if(queue->last != (linked_list*)NULL) {
-			queue->last->next = (linked_list*)NULL;
+
+		if(queue->first == queue->last) {
+			free(queue->first);
+			queue->first = (linked_list*)NULL;
+			queue->last = (linked_list*)NULL;
+			queue->size = 0;
+		} else {
+			linked_list* prev = queue->last->prev;
+			free(queue->last);
+			prev->next = (linked_list*)NULL;
+			queue->last = prev;
+			queue->size -= 1;
 		}
-		queue->size -= 1;
 	}
 
 	return result;
