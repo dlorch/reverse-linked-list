@@ -83,9 +83,9 @@ AVL Trees
 An [AVL tree] is a [self-balancing binary search tree]. Various [tree traversal]
 algorithms are also implemented (depth-first-search with pre-order-, in-order- and post-order-traversal,
 as well as breadth-first-search with level-order traversal). Breadth-first-search is using a [queue],
-implemented using a doubly-linked list. For visualisation of the binary search tree, [Graphviz]
-output is generated (since [drawing presentable trees] seems daunting). Use [Graph-Easy] or
-[Webgraphviz] to plot.
+implemented using a doubly-linked list. For visualization of the binary search tree, [Graphviz]
+output is generated (since [drawing presentable trees] seems daunting). If you do not have Graphviz
+installed, use [Webgraphviz] to plot.
 
 ```
 $ ./avl-tree
@@ -130,6 +130,5 @@ NO
 [queue]: https://en.wikipedia.org/wiki/Queue_(abstract_data_type)
 [stack]: https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
 [Graphviz]: https://graphviz.org/
-[Graph-Easy]: https://stackoverflow.com/a/3391213
 [drawing presentable trees]: https://llimllib.github.io/pymag-trees/
 [Webgraphviz]: http://www.webgraphviz.com/
