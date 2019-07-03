@@ -1,4 +1,4 @@
-all: reverse-linked-list hash-table palindrome avl-tree
+all: reverse-linked-list hash-table palindrome avl-tree parenthesis
 .PHONY: all
 
 reverse-linked-list: reverse-linked-list.c reverse-linked-list.h
@@ -12,3 +12,6 @@ palindrome: palindrome.c palindrome.h
 
 avl-tree: avl-tree.c avl-tree.h
 	gcc -std=c99 -Wall -o avl-tree avl-tree.c
+
+parenthesis: parenthesis.c parenthesis.h
+	gcc -std=c99 -Wall -o parenthesis parenthesis.c
