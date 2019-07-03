@@ -118,7 +118,6 @@ int binary_search_tree_balance_factor(binary_search_tree* node) {
 
 void binary_search_tree_rotate_right(binary_search_tree** tree) {
 	binary_search_tree* left_subtree = (*tree)->left;
-	binary_search_tree* right_subtree = (*tree)->right;
 
 	(*tree)->left = left_subtree->right;
 	left_subtree->right = *tree;
@@ -126,7 +125,6 @@ void binary_search_tree_rotate_right(binary_search_tree** tree) {
 }
 
 void binary_search_tree_rotate_left(binary_search_tree** tree) {
-	binary_search_tree* left_subtree = (*tree)->left;
 	binary_search_tree* right_subtree = (*tree)->right;
 
 	(*tree)->right = right_subtree->left;
@@ -185,7 +183,7 @@ void visit_node(binary_search_tree* tree) {
 }
 
 queue* queue_new() {
-	queue* q = calloc(sizeof(queue));
+	queue* q = calloc(sizeof(queue), 1);
 
 	if(q == (queue*)NULL) {
 		fatal_error("calloc failed");
@@ -198,11 +196,11 @@ void queue_destroy(queue** q) {
 	linked_list* current = (*q)->first;
     linked_list* next;
 
-    while(current != (linked_list*)NULL) {
-        next = current->next;
-        free(current);
-        current = next;
-    }
+	while(current != (linked_list*)NULL) {
+		next = current->next;
+		free(current);
+		current = next;
+	}
 
 	free(*q);
 
@@ -218,7 +216,7 @@ void enqueue(queue* queue, binary_search_tree* node) {
 
 	list->node = node;
 
-	if(queue->first == (linked_list*)NULL) {
+	if(queue->size == 0) {
 		list->next = (linked_list*)NULL;
 		list->prev = (linked_list*)NULL;
 		queue->first = list;
@@ -239,7 +237,7 @@ binary_search_tree* dequeue(queue* queue) {
 	if(queue->size > 0) {
 		result = queue->last->node;
 
-		if(queue->first == queue->last) {
+		if(queue->size == 1) {
 			free(queue->first);
 			queue->first = (linked_list*)NULL;
 			queue->last = (linked_list*)NULL;
