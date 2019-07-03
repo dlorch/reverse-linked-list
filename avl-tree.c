@@ -182,6 +182,8 @@ void visit_node(binary_search_tree* tree) {
 	printf("%d ", tree->value);
 }
 
+/* queue */
+
 queue* queue_new() {
 	queue* q = calloc(sizeof(queue), 1);
 
