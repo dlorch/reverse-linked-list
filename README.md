@@ -82,8 +82,8 @@ AVL Trees
 
 An [AVL tree] is a [self-balancing binary search tree]. Various [tree traversal]
 algorithms are also implemented (depth-first-search with pre-order-, in-order- and post-order-traversal,
-as well as breadth-first-search with level-order traversal). The latter is using a [queue]
-data structure, implemented using a doubly-linked list.
+as well as breadth-first-search with level-order traversal). The latter is using a [queue],
+implemented using a doubly-linked list.
 
 ```
 $ ./avl-tree
@@ -100,7 +100,7 @@ Breadth first search, level-order traversal: 17 67 72 76 23 54 19 12 14 9
 Matching Parenthesis Problem
 ============================
 
-Match parenthesis. Uses a [stack] data structure, implemented using a doubly-linked list.
+Match parenthesis. Uses a [stack], implemented using a doubly-linked list.
 
 ```
 $ ./parenthesis
@@ -122,3 +122,4 @@ NO
 [AVL tree]: https://en.wikipedia.org/wiki/AVL_tree
 [tree traversal]: https://en.wikipedia.org/wiki/Tree_traversal
 [queue]: https://en.wikipedia.org/wiki/Queue_(abstract_data_type)
+[stack]: https://en.wikipedia.org/wiki/Stack_(abstract_data_type) 
