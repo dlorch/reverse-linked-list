@@ -83,7 +83,9 @@ AVL Trees
 An [AVL tree] is a [self-balancing binary search tree]. Various [tree traversal]
 algorithms are also implemented (depth-first-search with pre-order-, in-order- and post-order-traversal,
 as well as breadth-first-search with level-order traversal). The latter is using a [queue],
-implemented using a doubly-linked list.
+implemented using a doubly-linked list. For visualisation of the binary search tree, [Graphviz]
+output is generated (since [drawing presentable trees] seems daunting). Use [Graph-Easy] or
+[Webgraphviz] to plot.
 
 ```
 $ ./avl-tree
@@ -95,7 +97,11 @@ Depth first search, pre-order traversal: 17 12 9 14 67 23 19 54 72 76
 Depth first search, in-order traversal: 9 12 14 17 19 23 54 67 72 76
 Depth first search, post-order traversal: 9 14 12 19 54 23 76 72 67 17
 Breadth first search, level-order traversal: 17 67 72 76 23 54 19 12 14 9
+Wrote "avl-tree.dot"
+$ dot -Tpng -o avl-tree.png avl-tree.dot
 ```
+
+![generated tree](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/avl-tree.png)
 
 Matching Parenthesis Problem
 ============================
@@ -122,4 +128,8 @@ NO
 [AVL tree]: https://en.wikipedia.org/wiki/AVL_tree
 [tree traversal]: https://en.wikipedia.org/wiki/Tree_traversal
 [queue]: https://en.wikipedia.org/wiki/Queue_(abstract_data_type)
-[stack]: https://en.wikipedia.org/wiki/Stack_(abstract_data_type) 
+[stack]: https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
+[Graphviz]: https://graphviz.org/
+[Graph-Easy]: https://stackoverflow.com/a/3391213
+[drawing presentable trees]: https://llimllib.github.io/pymag-trees/
+[Webgraphviz]: http://www.webgraphviz.com/

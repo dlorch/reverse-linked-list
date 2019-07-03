@@ -182,6 +182,34 @@ void visit_node(binary_search_tree* tree) {
 	printf("%d ", tree->value);
 }
 
+void write_dotfile(char* filename, binary_search_tree* tree) {
+	FILE *fp = fopen(filename, "w");
+	queue* q = queue_new();
+
+	fprintf(fp, "digraph avl_tree {\n");
+
+	enqueue(q, tree);
+
+	while(!queue_is_empty(q)) {
+		binary_search_tree* node = dequeue(q);
+
+		if(node->left != (binary_search_tree*)NULL) {
+			fprintf(fp, "  %d -> %d;\n", node->value, node->left->value);
+			enqueue(q, node->left);
+		}
+
+		if(node->right != (binary_search_tree*)NULL) {
+			fprintf(fp, "  %d -> %d;\n", node->value, node->right->value);
+			enqueue(q, node->right);
+		}
+	}
+
+	queue_destroy(&q);
+
+	fprintf(fp, "}\n");
+	fclose(fp);
+}
+
 /* queue */
 
 queue* queue_new() {
@@ -225,10 +253,10 @@ void enqueue(queue* queue, binary_search_tree* node) {
 		queue->last = list;
 		queue->size = 1;
 	} else {
-		list->next = (linked_list*)NULL;
-		list->prev = queue->last;
-		queue->last->next = list;
-		queue->last = list;
+		list->next = queue->first;
+		list->prev = (linked_list*)NULL;
+		queue->first->prev = list;
+		queue->first = list;
 		queue->size += 1;
 	}
 }
@@ -263,6 +291,7 @@ bool queue_is_empty(queue* queue) {
 // AVL tree: https://en.wikipedia.org/wiki/AVL_tree
 int main() {
 	binary_search_tree* tree = binary_search_tree_new(9);
+	char* filename = "avl-tree.dot";
 
 	binary_search_tree_insert(&tree, 12);
 	binary_search_tree_insert(&tree, 14);
@@ -294,6 +323,9 @@ int main() {
 	printf("Breadth first search, level-order traversal: ");
 	breadth_first_search_level_order_traversal(tree);
 	printf("\n");
+
+	write_dotfile(filename, tree);
+	printf("Wrote \"%s\"\n", filename);
 
 	binary_search_tree_destroy(&tree);
 

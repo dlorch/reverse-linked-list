@@ -1,3 +1,4 @@
+.DS_Store
 *.dSYM
 reverse-linked-list
 hash-table
