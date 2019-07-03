@@ -106,7 +106,7 @@ stack* stack_new() {
 
 void stack_destroy(stack** s) {
 	linked_list* current = (*s)->first;
-    linked_list* next;
+	linked_list* next;
 
 	while(current != (linked_list*)NULL) {
 		next = current->next;
