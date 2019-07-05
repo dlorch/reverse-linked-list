@@ -41,10 +41,7 @@ class CrashStopReliableBroadcastActor extends Actor {
   
     def receive = {
       case ReliableBroadcast(m) => {
-          Π.find(_.path.name == "p2") match {
-              case Some(p2) => p2 ! m
-              case None =>
-          }         
+          Π.filter(_ != self).head ! m // randomly pick another peer ("random" because HashSet does not guarantee ordering)
           println(s"[${self.path.name}] crashed")
       }
       case m: Message => // do nothing, we are crashed
