@@ -18,14 +18,14 @@ class ReliableBroadcastActor extends Actor {
 
   def receive = {
     case ReliableBroadcast(m) => {
-        val othersExceptMe = Π.filter(actor => actor.path.name != self.path.name)
+        val othersExceptMe = Π.filter(_ != self)
         othersExceptMe.foreach(q => q ! m)
         deliver(m)
         delivered += m.uuid
     }
     case m: Message => {
         if(!delivered.contains(m.uuid)) {
-            val othersExceptSenderAndMe = Π.filter(actor => actor != m.sender || actor.path.name != self.path.name)
+            val othersExceptSenderAndMe = Π.filter(_ != m.sender).filter(_ != self)
             othersExceptSenderAndMe.foreach(q => q ! m)
             deliver(m)
             delivered += m.uuid
@@ -43,7 +43,7 @@ class CrashStopReliableBroadcastActor extends Actor {
   
     def receive = {
       case ReliableBroadcast(m) => {
-          Π.find(actor => actor.path.name == "p2") match {
+          Π.find(_.path.name == "p2") match {
               case Some(p2) => p2 ! m
               case None =>
           }         
