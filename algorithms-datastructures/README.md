@@ -120,7 +120,6 @@ Input> ({(()))}}
 NO
 ```
 
-[reversing a singly linked list]: https://rethinkdb.com/blog/will-the-real-programmers-please-stand-up/
 [hash table]: https://en.wikipedia.org/wiki/Hash_table
 [palindrome]: https://en.wikipedia.org/wiki/Palindrome
 [self-balancing binary search tree]: https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree
