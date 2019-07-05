@@ -5,3 +5,7 @@ hash-table
 palindrome
 avl-tree
 parenthesis
+.bloop
+.metals
+project
+target
