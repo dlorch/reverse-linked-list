@@ -18,15 +18,13 @@ class ReliableBroadcastActor extends Actor {
 
   def receive = {
     case ReliableBroadcast(m) => {
-        val othersExceptMe = Π.filter(_ != self)
-        othersExceptMe.foreach(q => q ! m)
+        Π.filter(_ != self).foreach(q => q ! m)
         deliver(m)
         delivered += m.uuid
     }
     case m: Message => {
         if(!delivered.contains(m.uuid)) {
-            val othersExceptSenderAndMe = Π.filter(_ != m.sender).filter(_ != self)
-            othersExceptSenderAndMe.foreach(q => q ! m)
+            Π.filter(_ != m.sender).filter(_ != self).foreach(q => q ! m)
             deliver(m)
             delivered += m.uuid
         }
