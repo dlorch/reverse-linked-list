@@ -1,4 +1,4 @@
-name := "Hello Test #1"
+name := "Distributed Algorithms"
 
 version := "1.0"
 
