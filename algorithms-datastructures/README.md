@@ -100,7 +100,7 @@ Wrote "avl-tree.dot"
 $ dot -Tpng -o avl-tree.png avl-tree.dot
 ```
 
-![generated tree](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/avl-tree.png)
+![generated tree](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/algorithms-datastructures/avl-tree.png)
 
 Matching Parenthesis Problem
 ============================
