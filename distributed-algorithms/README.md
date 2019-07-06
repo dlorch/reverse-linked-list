@@ -39,8 +39,9 @@ $ sbt "runMain com.github.dlorch.ReliableBroadcast.Main"
 
 Implementation of [FIFO broadcast] protocol, which is a "FIFO Order transformation applied to a reliable
 broadcast". Note that p1 sends the first, then third, finally the second message, but due to sequencing,
-the messages arrive in correct FIFO order. In reality, p1 would be sending those messages in the *correct
-order*. The messages might arrive in the wrong order at the destination due to forwarding or networking delays.
+the messages are delivered in correct FIFO order. In reality, p1 would be sending those messages in the
+*correct order*. The messages might arrive in the wrong order at the destination due to forwarding or
+networking delays.
 
 ```
 $ sbt "runMain com.github.dlorch.FIFOBroadcast.Main"
