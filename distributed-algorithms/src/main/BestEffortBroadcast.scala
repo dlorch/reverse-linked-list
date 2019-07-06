@@ -15,6 +15,10 @@ class BestEffortBroadcastActor extends Actor {
   import Environment._
 
   def receive = {
+     // the actor library provides you facilities for broadcasting that you might prefer
+     // to use ina *real* actor system, e.g. system.actorSelection("/user/*") ! m
+     // or alternatively context.system.eventStream.subscribe() and .publish()
+     // the approach here was chosen to keep in line with the documentation
     case BestEffortBroadcast(m) => Π.foreach(q => q ! m)
     case m: Message => deliver(m)
   }
