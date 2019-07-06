@@ -37,10 +37,10 @@ $ sbt "runMain com.github.dlorch.ReliableBroadcast.Main"
 [![Reliable broadcast algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-22.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
 [![Reliable broadcast example](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-23.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
 
-Implementation of [FIFO broadcast] protocol. Note that p1 sends the first, then third, finally the second
-message, but due to sequencing, the messages arrive in correct FIFO order. In reality, p1 would be sending
-those messages in the *correct order*. The messages might arrive in the wrong order at the destination
-due to forwarding or networking delays.
+Implementation of [FIFO broadcast] protocol, which is a "FIFO Order transformation applied to a reliable
+broadcast". Note that p1 sends the first, then third, finally the second message, but due to sequencing,
+the messages arrive in correct FIFO order. In reality, p1 would be sending those messages in the *correct
+order*. The messages might arrive in the wrong order at the destination due to forwarding or networking delays.
 
 ```
 $ sbt "runMain com.github.dlorch.FIFOBroadcast.Main"
