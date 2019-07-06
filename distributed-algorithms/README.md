@@ -37,5 +37,28 @@ $ sbt "runMain com.github.dlorch.ReliableBroadcast.Main"
 [![Reliable broadcast algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-22.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
 [![Reliable broadcast example](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-23.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
 
+Implementation of [FIFO broadcast] protocol. Note that p1 sends the first, then third, finally the second
+message, but due to sequencing, the messages arrive in correct FIFO order. Note that in reality, p1 would be
+sending those messages in the *correct order*. The messages might arrive in the wrong order at the destination
+due to forwarding or networking delays.
+
+```
+$ sbt "runMain com.github.dlorch.FIFOBroadcast.Main"
+[p1] [seqn: 1] message delivered: 1st message
+[p2] [seqn: 1] message delivered: 1st message
+[p3] [seqn: 1] message delivered: 1st message
+[p1] [seqn: 2] message delivered: 2nd message
+[p3] [seqn: 2] message delivered: 2nd message
+[p2] [seqn: 2] message delivered: 2nd message
+[p1] [seqn: 3] message delivered: 3rd message
+[p3] [seqn: 3] message delivered: 3rd message
+[p2] [seqn: 3] message delivered: 3rd message
+```
+
+[![FIFO Order](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-31.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
+[![A modular approach to broadcast](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-39.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
+[![FIFO Order algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-44.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
+
 [best-effort broadcast]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
 [reliable broadcast]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
+[FIFO broadcast]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
