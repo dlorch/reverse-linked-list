@@ -18,7 +18,8 @@ class BestEffortBroadcastActor extends Actor {
      // the actor library provides you facilities for broadcasting that you might prefer
      // to use in a *real* actor system, e.g. context.actorSelection("/user/*") ! m
      // or alternatively context.system.eventStream.subscribe() and .publish()
-     // the approach here was chosen to keep in line with the documentation
+     // the approach here was chosen to stay as close as possible to the algorithm
+     // descriptions in the literature.
     case BestEffortBroadcast(m) => Π.foreach(q => q ! m)
     case m: Message => deliver(m)
   }
