@@ -224,7 +224,7 @@ queue* queue_new() {
 
 void queue_destroy(queue** q) {
 	linked_list* current = (*q)->first;
-    linked_list* next;
+	linked_list* next;
 
 	while(current != (linked_list*)NULL) {
 		next = current->next;
