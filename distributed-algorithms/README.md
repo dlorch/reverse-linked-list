@@ -21,8 +21,8 @@ $ sbt "runMain com.github.dlorch.BestEffortBroadcast.Main"
 [p2] message delivered: Hello, distributed world!
 ```
 
-[![Best-effort broadcast algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-10.png)]
-[![Best-effort broadcast example](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-12.png)] 
+[![Best-effort broadcast algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-10.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
+[![Best-effort broadcast example](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-12.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
 
 Implementation of [reliable broadcast] protocol. Here, p1 sends message to p2, then
 crash-stops. Since p2 sends to p3, all correct processes eventually deliver the message:
@@ -34,8 +34,8 @@ $ sbt "runMain com.github.dlorch.ReliableBroadcast.Main"
 [p3] message delivered: Hello, reliable world!
 ```
 
-[![Reliable broadcast algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-22.png)]
-[![Reliable broadcast example](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-23.png)] |
+[![Reliable broadcast algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-22.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
+[![Reliable broadcast example](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-23.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
 
 [best-effort broadcast]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
 [reliable broadcast]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
