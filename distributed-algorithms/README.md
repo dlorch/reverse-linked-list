@@ -78,8 +78,6 @@ In the example above, a message with sequence number 2 arrives out-of-order. Eac
 `receive()`s and stores it in the `buffer`, until the next message with sequence number 1
 arrives, then it `deliver()`s messages 1 and 2 in the correct sequence to the process.
 
-| [Algorithms and Datastructures](algorithms-datastructures) | *Data structures:
-
 [![FIFO Order](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-31.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
 [![A modular approach to broadcast](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-39.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
 [![FIFO Order algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-44.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
