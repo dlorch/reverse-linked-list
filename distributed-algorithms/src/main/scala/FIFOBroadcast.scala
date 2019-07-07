@@ -17,6 +17,7 @@ trait ReliableBroadcastActor extends Actor {
   var delivered = HashSet[String]()
 
   def R_broadcast(m: Message) {
+    println(s"[${self.path.name}] [seqn: ${m.seqn}] initiating reliable broadcast: ${m.body} ")
     Π.filter(_ != self).foreach(q => q ! m)
     R_deliver(m)
     delivered += m.uuid

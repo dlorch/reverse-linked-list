@@ -45,14 +45,17 @@ networking delays.
 
 ```
 $ sbt "runMain com.github.dlorch.FIFOBroadcast.Main"
+[p1] [seqn: 1] initiating reliable broadcast: 1st message
 [p1] [seqn: 1] message delivered: 1st message
-[p2] [seqn: 1] message delivered: 1st message
 [p3] [seqn: 1] message delivered: 1st message
+[p1] [seqn: 3] initiating reliable broadcast: 3rd message
+[p2] [seqn: 1] message delivered: 1st message
+[p1] [seqn: 2] initiating reliable broadcast: 2nd message
 [p1] [seqn: 2] message delivered: 2nd message
 [p3] [seqn: 2] message delivered: 2nd message
-[p2] [seqn: 2] message delivered: 2nd message
 [p1] [seqn: 3] message delivered: 3rd message
 [p3] [seqn: 3] message delivered: 3rd message
+[p2] [seqn: 2] message delivered: 2nd message
 [p2] [seqn: 3] message delivered: 3rd message
 ```
 
