@@ -30,7 +30,9 @@ trait ReliableBroadcastActor extends Actor {
     }
   }
 
-  def R_deliver(m: Message)
+  def R_deliver(m: Message) {
+    println(s"[${self.path.name}] [seqn: ${m.seqn}] message delivered: ${m.body}")
+  }
 }
 
 class FIFOBroadcastActor extends ReliableBroadcastActor {
@@ -63,7 +65,7 @@ class FIFOBroadcastActor extends ReliableBroadcastActor {
   def nextMessageInBuffer(m: Message) = buffer.filter(_.sender == m.sender).filter(_.seqn == next(m.sender)).headOption
 
   def F_deliver(m: Message) {
-    println(s"[${self.path.name}] [seqn: ${m.seqn}] message delivered: ${m.body} ")
+    println(s"[${self.path.name}] [seqn: ${m.seqn}] message delivered: ${m.body}")
   }
 }
 
@@ -80,6 +82,8 @@ object Main extends App {
   Π += p3
 
   p1 ! FIFOBroadcast(Message(body = "1st message", sender = p1, seqn = 1))
+  Thread.sleep(200)
   p1 ! FIFOBroadcast(Message(body = "3rd message", sender = p1, seqn = 3))
+  Thread.sleep(200)
   p1 ! FIFOBroadcast(Message(body = "2nd message", sender = p1, seqn = 2))
 }
