@@ -2,9 +2,8 @@ package com.github.dlorch.BestEffortBroadcast
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import scala.collection.mutable.HashSet
-import java.util.UUID
 
-case class Message(uuid: String = UUID.randomUUID.toString, body: String)
+case class Message(body: String)
 case class BestEffortBroadcast(m: Message)
 
 object Environment {

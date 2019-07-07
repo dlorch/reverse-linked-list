@@ -2,9 +2,8 @@ package com.github.dlorch.ReliableBroadcast
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import scala.collection.mutable.HashSet
-import java.util.UUID
 
-case class Message(uuid: String = UUID.randomUUID.toString, body: String, sender: ActorRef)
+case class Message(body: String, sender: ActorRef)
 case class ReliableBroadcast(m: Message)
 
 object Environment {
@@ -14,19 +13,19 @@ object Environment {
 class ReliableBroadcastActor extends Actor {
   import Environment._
 
-  var delivered = HashSet[String]()
+  var delivered = HashSet[Message]()
 
   def receive = {
     case ReliableBroadcast(m) => {
         Π.filter(_ != self).foreach(q => q ! m)
         deliver(m)
-        delivered += m.uuid
+        delivered += m
     }
     case m: Message => {
-        if(!delivered.contains(m.uuid)) {
+        if(!delivered.contains(m)) {
             Π.filter(_ != m.sender).filter(_ != self).foreach(q => q ! m)
             deliver(m)
-            delivered += m.uuid
+            delivered += m
         }
     }
   }

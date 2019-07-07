@@ -2,9 +2,8 @@ package com.github.dlorch.FIFOBroadcast
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import scala.collection.mutable.{HashSet, HashMap}
-import java.util.UUID
 
-case class Message(uuid: String = UUID.randomUUID.toString, body: String, sender: ActorRef, seqn: Int)
+case class Message(body: String, sender: ActorRef, seqn: Int)
 case class FIFOBroadcast(m: Message)
 
 object Environment {
@@ -14,25 +13,23 @@ object Environment {
 trait ReliableBroadcastActor extends Actor {
   import Environment._
 
-  var delivered = HashSet[String]()
+  var delivered = HashSet[Message]()
 
   def R_broadcast(m: Message) {
     Π.filter(_ != self).foreach(q => q ! m)
     R_deliver(m)
-    delivered += m.uuid
+    delivered += m
   }
 
   def R_receive(m: Message) {
-    if(!delivered.contains(m.uuid)) {
+    if(!delivered.contains(m)) {
       Π.filter(_ != m.sender).filter(_ != self).foreach(q => q ! m)
       R_deliver(m)
-      delivered += m.uuid
+      delivered += m
     }
   }
 
-  def R_deliver(m: Message) {
-    println(s"[${self.path.name}] [seqn: ${m.seqn}] message delivered: ${m.body}")
-  }
+  def R_deliver(m: Message)
 }
 
 class FIFOBroadcastActor extends ReliableBroadcastActor {
