@@ -21,7 +21,7 @@ $ sbt "runMain com.github.dlorch.BestEffortBroadcast.Main"
 [p2] message delivered: Hello, distributed world!
 ```
 
-[![Best-effort broadcast algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-10.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
+[![Best-effort broadcast algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-10.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=11)
 [![Best-effort broadcast example](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-12.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf)
 
 Implementation of [reliable broadcast] protocol. Here, p1 sends message to p2, then
