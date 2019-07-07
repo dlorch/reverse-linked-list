@@ -17,7 +17,6 @@ trait ReliableBroadcastActor extends Actor {
   var delivered = HashSet[String]()
 
   def R_broadcast(m: Message) {
-    println(s"[${self.path.name}] [seqn: ${m.seqn}] initiating reliable broadcast: ${m.body} ")
     Π.filter(_ != self).foreach(q => q ! m)
     R_deliver(m)
     delivered += m.uuid
@@ -41,7 +40,10 @@ class FIFOBroadcastActor extends ReliableBroadcastActor {
   var next = HashMap[ActorRef, Int]().withDefaultValue(1)
 
   def receive = {
-    case FIFOBroadcast(m) => super.R_broadcast(m)
+    case FIFOBroadcast(m) => {
+      println(s"[${self.path.name}] [seqn: ${m.seqn}] initiating reliable broadcast: ${m.body}")
+      super.R_broadcast(m)
+    }
     case m: Message => super.R_receive(m)
   }
 
