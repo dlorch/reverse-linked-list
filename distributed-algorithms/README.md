@@ -107,7 +107,7 @@ then it does not matter which one came first (Source: [Lamport timestamps]).
 [![Definition Causal Order]](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-33.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=34)
 [![Definition Causal Order]](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-34.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=35)
 
-The following is an attempt to re-create the scenario from [Causal Order - Algorithm 1](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-48.png).
+The following is an attempt to re-create the scenario from [Causal Order - Algorithm 1](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-49.png).
 First `p1` broadcasts a message `m1` (suppose the message says "Buy milk") to all its peers, but due
 to network delays can only reach itself and `p2`. Then, `p2` broadcasts a message `m2` (suppose it
 is "Sell milk"). Note that the two messages are causally related - milk can only be sold once it
