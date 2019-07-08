@@ -49,17 +49,21 @@ class FIFOBroadcastActor extends ReliableBroadcastActor {
   override def R_deliver(m: Message) {
     buffer += m
 
-    var m_prime = nextMessageInBuffer(m)
+    var m_prime = nextMessageForPeer(m.sender)
     while(m_prime.isDefined) {
       F_deliver(m_prime.get)
       next(m.sender) += 1
       buffer -= m_prime.get
 
-      m_prime = nextMessageInBuffer(m)
+      m_prime = nextMessageForPeer(m.sender)
     }
   }
 
-  def nextMessageInBuffer(m: Message) = buffer.filter(_.sender == m.sender).filter(_.seqn == next(m.sender)).headOption
+  private def nextMessageForPeer(p: ActorRef) = {
+    buffer.filter(_.sender == p)
+          .filter(_.seqn == next(p))
+          .headOption
+  }
 
   def F_deliver(m: Message) {
     println(s"[${self.path.name}] [seqn: ${m.seqn}] message delivered: ${m.body}")
