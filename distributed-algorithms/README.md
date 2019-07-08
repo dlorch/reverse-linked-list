@@ -104,8 +104,8 @@ could not have affected each other. If `a` and `b` cannot have any effect on eac
 then it does not matter which one came first (Source: [Lamport timestamps]).
 
 [![Definition Causal Order](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-32.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=33)
-[![Definition Causal Order]](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-33.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=34)
-[![Definition Causal Order]](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-34.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=35)
+[![Definition Causal Order](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-33.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=34)
+[![Definition Causal Order](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-34.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=35)
 
 The following is an attempt to re-create the scenario from [Causal Order - Algorithm 1](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-49.png).
 First `p1` broadcasts a message `m1` (suppose the message says "Buy milk") to all its peers, but due
@@ -130,6 +130,17 @@ $ sbt "runMain com.github.dlorch.CausalOrderNonBlockingBroadcast.Main"
 
 [![Causal Order Non-Blocking Algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-48.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=49)
 [![Causal Order Non-Blocking Algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-49.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=50)
+
+Implementation of a *blocking* [causal order] broadcast protocol based on vector clocks,
+where "blocking" means that the process may delay the delivery of a message for a later
+time.
+
+```
+TODO
+```
+
+[![Causal Order Blocking Algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-51.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=52)
+[![Causal Order Blocking Algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-52.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=53)
 
 [distributed algorithms]: https://en.wikipedia.org/wiki/Distributed_algorithm
 [best-effort broadcast]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
