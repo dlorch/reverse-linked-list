@@ -95,7 +95,46 @@ At the *end of the execution*, the `next` tables in the entire system look like 
 [![A modular approach to broadcast](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-39.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=40)
 [![FIFO Order algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-44.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=45)
 
+### Causal Order Broadcast
+
+For any two events `a` and `b`, if there is any way that `a` could have influenced `b`, then
+`a` [happened-before] `b` and the two events are causally related. It is also possible to
+have two events where we cannot say which came first; when that happens, it means that they
+could not have affected each other. If `a` and `b` cannot have any effect on each other,
+then it does not matter which one came first (Source: [Lamport timestamps]).
+
+[![Definition Causal Order](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-32.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=33)
+[![Definition Causal Order]](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-33.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=34)
+[![Definition Causal Order]](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-34.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=35)
+
+The following is an attempt to re-create the scenario from [Causal Order - Algorithm 1](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-48.png).
+First `p1` broadcasts a message `m1` (suppose the message says "Buy milk") to all its peers, but due
+to network delays can only reach itself and `p2`. Then, `p2` broadcasts a message `m2` (suppose it
+is "Sell milk"). Note that the two messages are causally related - milk can only be sold once it
+has been bought. When `p2` broadcasts its message `m2`, it also includes its recent history, a
+sequence or list `[m1]` along with it. `p3` will thus receive `m2` along with the history `[m1]`
+and correctly deliver the messages in causal order.
+
+Implementation of a *non-blocking* [causal order] protocol:
+
+```
+$ sbt "runMain com.github.dlorch.CausalOrderNonBlockingBroadcast.Main"
+[p1] [sender: p1, seqn: 1] message delivered: Buy milk
+[p2] [sender: p1, seqn: 1] message delivered: Buy milk
+[p3] joined the party late
+[p2] [sender: p2, seqn: 1] message delivered: Sell milk
+[p3] [sender: p1, seqn: 1] message delivered: Buy milk
+[p1] [sender: p2, seqn: 1] message delivered: Sell milk
+[p3] [sender: p2, seqn: 1] message delivered: Sell milk
+```
+
+[![Causal Order Non-Blocking Algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-48.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=49)
+[![Causal Order Non-Blocking Algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-49.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=50)
+
 [distributed algorithms]: https://en.wikipedia.org/wiki/Distributed_algorithm
 [best-effort broadcast]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
 [reliable broadcast]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
 [FIFO broadcast]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
+[causal order]: http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf
+[Lamport timestamps]: https://en.wikipedia.org/wiki/Lamport_timestamps
+[happened-before]: https://en.wikipedia.org/wiki/Happened-before
