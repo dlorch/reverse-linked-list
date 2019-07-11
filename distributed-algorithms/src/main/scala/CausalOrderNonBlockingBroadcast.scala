@@ -109,7 +109,7 @@ object Main extends App {
   val p2 = system.actorOf(Props[CausalOrderNonBlockingBroadcastActor], name = "p2")
   val p3 = system.actorOf(Props[CausalOrderNonBlockingBroadcastActor], name = "p3")
   val m1 = Message(body = "Buy milk", sender = p1, seqn = 1)
-  val m2 = Message(body = "Sell milk", sender = p2, seqn = 1)
+  val m2 = Message(body = "Sell cheese", sender = p2, seqn = 1)
 
   Π += p1
   Π += p2
