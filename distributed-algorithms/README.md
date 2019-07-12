@@ -135,7 +135,12 @@ where "blocking" means that the process may delay the delivery of a message for 
 time.
 
 ```
-TODO
+[p2] [sender: p1, seqn: 1] message delivered: Buy milk
+[p1] [sender: p1, seqn: 1] message delivered: Buy milk
+[p3] [sender: p1, seqn: 1] message delivered: Buy milk
+[p2] [sender: p2, seqn: 1] message delivered: Sell cheese
+[p3] [sender: p2, seqn: 1] message delivered: Sell cheese
+[p1] [sender: p2, seqn: 1] message delivered: Sell cheese
 ```
 
 [![Causal Order Blocking Algorithm](https://raw.githubusercontent.com/dlorch/reverse-linked-list/master/distributed-algorithms/images/04-rb-51.png)](http://disi.unitn.it/~montreso/ds/handouts/04-rb.pdf#page=52)
