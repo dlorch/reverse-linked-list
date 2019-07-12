@@ -2,10 +2,6 @@ package com.github.dlorch.CausalOrderBlockingBroadcast
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import scala.collection.mutable.{HashSet, HashMap}
-import scala.concurrent.duration._
-import scala.concurrent._
-import ExecutionContext.Implicits.global
-import scala.language.postfixOps
 
 case class Message(body: String, sender: ActorRef, seqn: Int)
 case class CausalOrderBlockingBroadcast(m: Message)
