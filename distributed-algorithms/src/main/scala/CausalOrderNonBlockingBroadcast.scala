@@ -60,9 +60,7 @@ trait FIFOBroadcastActor extends ReliableBroadcastActor {
   }
 
   private def nextMessageForPeer(p: ActorRef) = {
-    buffer.filter(_.sender == p)
-          .filter(_.seqn == next(p))
-          .headOption
+    buffer.find(m_prime => m_prime.sender == p && m_prime.seqn == next(p))
   }
 
   def F_broadcast(m: Message, recent: List[Message]) = super.R_broadcast(m, recent)
