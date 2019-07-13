@@ -102,21 +102,26 @@ class CausalOrderBlockingBroadcastActor extends FIFOBroadcastActor {
   }
 } 
 
+class ReplyingCausalOrderBlockingBroadcastActor extends CausalOrderBlockingBroadcastActor {
+  override def C_deliver(m: Message) {
+    if(m.body == "Buy milk") {
+      self ! CausalOrderBlockingBroadcast(Message(body = "Sell cheese", sender = self, seqn = 1))
+    }
+    super.C_deliver(m)
+  }
+}
+
 object Main extends App {
   import Environment._
 
   val system = ActorSystem("CausalOrderBlockingBroadcastSystem")
   val p1 = system.actorOf(Props[CausalOrderBlockingBroadcastActor], name = "p1")
-  val p2 = system.actorOf(Props[CausalOrderBlockingBroadcastActor], name = "p2")
+  val p2 = system.actorOf(Props[ReplyingCausalOrderBlockingBroadcastActor], name = "p2")
   val p3 = system.actorOf(Props[CausalOrderBlockingBroadcastActor], name = "p3")
-  val m1 = Message(body = "Buy milk", sender = p1, seqn = 1)
-  val m2 = Message(body = "Sell cheese", sender = p2, seqn = 1)
 
   Π += p1
   Π += p2
   Π += p3
 
-  p1 ! CausalOrderBlockingBroadcast(m1)
-  Thread.sleep(100)
-  p2 ! CausalOrderBlockingBroadcast(m2)
+  p1 ! CausalOrderBlockingBroadcast(Message(body = "Buy milk", sender = p1, seqn = 1))
 }
